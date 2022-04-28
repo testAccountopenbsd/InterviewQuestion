@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: create group users777
+      command: app -b -m group -a "name=users777 state=present"
+    - name: allow group users777 to have sudo access without a password
+      command: # %users777 ALL=NOPASSWD in sudoers 
+    - name: install nmap # assumes red hat/derived
+      command: dnf install nmap
