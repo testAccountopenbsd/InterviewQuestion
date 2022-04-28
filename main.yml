@@ -7,6 +7,12 @@
     - name: create group users777
       command: app -b -m group -a "name=users777 state=present"
     - name: allow group users777 to have sudo access without a password
-      command: # %users777 ALL=NOPASSWD in sudoers 
+    # %users777 ALL=NOPASSWD in sudoers
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%users777'
+        line: '%users777 ALL=(ALL) NOPASSWD: ALL'
+      
     - name: install nmap # assumes red hat/derived
       command: dnf install nmap
